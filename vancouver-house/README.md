@@ -28,6 +28,7 @@ continuous transformation, which is what start/end keyframe video generation han
 | [`reference-analysis.md`](reference-analysis.md) | Frame-by-frame decode of the source video |
 | [`script.md`](script.md) | 14-beat narration script with timings and sources |
 | [`prompts/keyframes.md`](prompts/keyframes.md) | The 14 image prompts + locked style block |
+| [`keyframes/`](keyframes/) | The 13 generated stills + `MANIFEST.md` + contact sheet |
 
 ## Palette — ours, not the reference's
 
@@ -38,11 +39,9 @@ slate blue + teal + bone white, with **amber reserved exclusively for constraint
 ## Banner line
 
 The reference's banner — *"Finally you found a page dedicated to Explaining Architecture"* — is
-the original channel's branding and is **not** reused. Replacement options:
+the original channel's branding and is **not** reused. **Chosen replacement:**
 
-1. **"Every weird building has a reason. Here's this one."** *(recommended)*
-2. "The constraint that made this building."
-3. "Why it looks like that."
+> **Every weird building has a reason. Here's this one.**
 
 Rendered as 2 lines, white serif, top-left of the deep-charcoal upper bar, static throughout.
 
@@ -61,11 +60,12 @@ Rendered as 2 lines, white serif, top-left of the deep-charcoal upper bar, stati
 - [x] Reference video decoded frame-by-frame
 - [x] Project selected and researched
 - [x] Script written and fact-checked against sources
-- [x] Style lock generated (2 candidates)
-- [ ] Style lock approved
-- [ ] K01-K12 generated
-- [ ] Video chain
-- [ ] Assembly
+- [x] Style lock generated (2 candidates) and approved — tight/warm variant
+- [x] K01-K13 generated, all reference-chained to the style lock
+- [ ] Regenerate K09 (plaza beat doesn't read yet — see `keyframes/MANIFEST.md`)
+- [ ] Source the licensed closing photograph (K14)
+- [ ] Video chain — 12 clips, consecutive stills as start/end keyframes
+- [ ] Assembly — concat, letterbox, banner, karaoke captions, TTS narration
 
 ## Note on the sandbox
 
