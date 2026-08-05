@@ -62,10 +62,14 @@ Rendered as 2 lines, white serif, top-left of the deep-charcoal upper bar, stati
 - [x] Script written and fact-checked against sources
 - [x] Style lock generated (2 candidates) and approved — tight/warm variant
 - [x] K01-K13 generated, all reference-chained to the style lock
-- [ ] Regenerate K09 (plaza beat doesn't read yet — see `keyframes/MANIFEST.md`)
+- [x] K09 regenerated (third attempt kept — see `keyframes/MANIFEST.md`)
+- [x] Video chain — 12 clips on Kling 2.5, 1080p 9:16, start/end keyframes
+- [x] Clips concatenated into an 80s cut — see `assembly/ASSETS.md`
+- [x] Narration generated (ElevenLabs v3, British documentary register)
+- [x] Caption SRT generator + ffmpeg assembly script
+- [ ] **Watch the 80s cut** — motion is unverified, see the "Not verified" section of `assembly/ASSETS.md`
 - [ ] Source the licensed closing photograph (K14)
-- [ ] Video chain — 12 clips, consecutive stills as start/end keyframes
-- [ ] Assembly — concat, letterbox, banner, karaoke captions, TTS narration
+- [ ] Run `assembly/build.sh` on a machine that can reach the CDN
 
 ## Note on the sandbox
 
