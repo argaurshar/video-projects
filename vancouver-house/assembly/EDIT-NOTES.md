@@ -50,6 +50,40 @@ labels disappeared over them. Two fixes, both in `render_overlay.py`:
   loophole text block sit on their own dark plate. The `HEIGHT` reveal is the
   hinge of the entire argument and was unreadable amber-on-white before this.
 
+## Two rules learned from QC
+
+**Never draw a plan diagram directly over the building.** The floorplate
+comparison was first composited straight onto the tower and read as a gable line
+on the facade — a viewer sees a shape *on* the building, not a plan *of* it.
+Every plan diagram now sits inside an opaque plate so it is unmistakably a
+diagram. The `x2` panel is near-opaque (0.97) because it is the payoff number.
+
+**The plates do not reliably show the massing the graphics assert.** See the
+open issue below.
+
+## Open issue: the plates contradict the argument
+
+In several shots the AI plate shows a tower that **tapers inward** as it rises —
+wider at the base, narrower at the crown. That is the opposite of Vancouver
+House, and the opposite of what the graphics assert directly on top of it.
+
+The graphics layer carries the argument correctly, and keeping all plan diagrams
+inside plates means the viewer reads the diagram rather than the plate. But the
+background still undercuts the foreground in the doubling and morph beats if you
+look at the silhouette.
+
+This cannot be fixed in post. The real fix is one of:
+
+1. Re-generate the affected clips with much more explicit massing language in the
+   prompt, and reject any take whose silhouette tapers the wrong way — the
+   keyframes themselves (`../keyframes/K13_hero.jpg`, `K05`, `K06`) do show the
+   correct pinched base, so the stills are right and the video model drifted off
+   them.
+2. Or model the massing properly in 3D and render the plates, which is what this
+   format really wants and what removes the problem permanently.
+
+Option 1 is cheap (325-650 credits per clip) and worth trying first.
+
 ## Rebuilding
 
 ```bash

@@ -437,20 +437,33 @@ def draw_morph(d, p, dur):
 
 
 def draw_double(d, p, dur):
+    """Plan comparison lives in its own panel.
+
+    Drawn directly over the tower it read as a gable line on the facade rather
+    than as two floorplates seen in plan -- actively misleading. Keep every plan
+    diagram inside a plate so it is unambiguously a diagram, never a decal.
+    """
     a = fade(p, 0.25, 0.25, dur)
     pr = ease_in(p, 1.4, 0.3)
-    cx, cy = W / 2, 1230
-    # counter sits above the shapes so it never collides with the caption band
-    f = font(F_MONO, 96)
+    px, py, pw, ph = 90, INNER_TOP + 120, W - 180, 520
+    # near-opaque: this is the payoff number, the plate must not show through it
+    d.rectangle([px, py, px + pw, py + ph], fill=alpha(INK, a * 0.97))
+    d.rectangle([px, py, px + pw, py + 7], fill=alpha(AMBER, a))
+    d.text((px + 28, py + 30), "FLOORPLATE  ·  SAME SITE", font=font(F_SANS, 32),
+           fill=alpha(AMBER, a))
+
+    cx, cy = px + pw / 2, py + 250
+    plan_shape(d, cx, cy, 400, 1.0, alpha(AMBER, a), width=5, fill_a=a * 0.16)
+    plan_shape(d, cx, cy, 400 * (1 - 0.52 * pr), 0.0, alpha(WHITE, a), width=4)
+    fl = font(F_MONO, 24)
+    d.text((px + 28, py + 214), "L01", font=fl, fill=alpha(WHITE, a))
+    d.text((px + pw - 80, py + 214), "L59", font=fl, fill=alpha(AMBER, a))
+
+    f = font(F_MONO, 84)
     txt = f"x{1.0 + 1.0 * pr:.1f}"
     bb = d.textbbox((0, 0), txt, font=f)
-    tw = bb[2] - bb[0]
-    d.rectangle([cx - tw / 2 - 26, INNER_TOP + 60, cx + tw / 2 + 26,
-                 INNER_TOP + 196], fill=alpha(INK, a * 0.82))
-    d.text((cx - tw / 2, INNER_TOP + 66), txt, font=f, fill=alpha(AMBER, a))
-    headline(d, "FLOORPLATE  ·  SAME SITE", INNER_TOP + 214, a, size=34)
-    plan_shape(d, cx, cy, 420, 1.0, alpha(AMBER, a), width=5, fill_a=a * 0.14)
-    plan_shape(d, cx, cy, 420 * (1 - 0.52 * pr), 0.0, alpha(WHITE, a), width=4)
+    d.text((cx - (bb[2] - bb[0]) / 2, py + ph - 130), txt, font=f,
+           fill=alpha(AMBER, a))
 
 
 def draw_shadow(d, p, dur):
