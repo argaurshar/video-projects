@@ -9,8 +9,11 @@ labels, captions -- is drawn here as real vector graphics, frame by frame.
 
 LAYOUT CONTRACT (added after an audit found 7 of 11 beats colliding):
 
-    422 .. 470     top charcoal bar bleed / breathing room
-    470 .. 1600    CONTENT -- every graphic element must fit inside this
+      0 .. 310     top charcoal bar -- sized to its content, not to a
+                   borrowed proportion. It holds the spec line, the two-line
+                   banner and the progress rail (205px of ink) plus padding.
+    310 .. 360     bleed / breathing room
+    360 .. 1600    CONTENT -- every graphic element must fit inside this
     1600 .. 1636   dead air
     1636 .. 1824   CAPTION band -- reserved, no graphic may enter it
     1824 .. 1920   bottom charcoal bar
@@ -30,12 +33,12 @@ from PIL import Image, ImageDraw, ImageFont
 # ----------------------------------------------------------------- constants
 W, H = 1080, 1920
 FPS = 25
-TOP = 422
-BOT = 96
+TOP = 310          # was 422, copied from the reference; 217px of it was
+BOT = 96           # empty black. Sized to the chrome's real ink bounds now.
 INNER_TOP = TOP
 INNER_BOT = H - BOT
 
-CONTENT_TOP = 470
+CONTENT_TOP = 360
 CONTENT_BOT = 1600
 CAP_TOP = 1636
 CAP_SIZE = 54
@@ -274,11 +277,11 @@ def scrim(img):
 
 def chrome(d, gi):
     fb = font(F_SERIF, 43)
-    d.text((44, 150), BANNER[0], font=fb, fill=WHITE)
-    d.text((44, 202), BANNER[1], font=fb, fill=WHITE)
-    d.text((44, 96), SPECS, font=font(F_SANS, 22), fill=alpha(AMBER, 0.9))
+    d.text((44, 95), BANNER[0], font=fb, fill=WHITE)
+    d.text((44, 147), BANNER[1], font=fb, fill=WHITE)
+    d.text((44, 41), SPECS, font=font(F_SANS, 22), fill=alpha(AMBER, 0.9))
     t = gi / FPS
-    x0, rail_w, y, gap = 44, W - 88, 300, 6
+    x0, rail_w, y, gap = 44, W - 88, 245, 6
     seg = (rail_w - gap * (len(BEATS) - 1)) / len(BEATS)
     acc = 0.0
     for i, (_n, dur, _a, _b) in enumerate(BEATS):

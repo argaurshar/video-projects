@@ -32,7 +32,7 @@ BEATS = [
     ("11", 4.5, 75.0, 81.0),   # card
 ]
 
-W, H, PLATE_H, TOP = 1080, 1920, 1402, 422
+W, H, PLATE_H, TOP = 1080, 1920, 1514, 310
 FPS = 25
 TOTAL = sum(b[1] for b in BEATS)
 HERE = os.path.dirname(os.path.abspath(__file__))
