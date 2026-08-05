@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+
+# Installed with: npx skills add heygen-com/hyperframes
+# Vendored third-party skill package -- reproducible, not ours to commit.
+.agents/
+.claude/skills/
+skills-lock.json
