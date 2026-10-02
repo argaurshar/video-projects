@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>House build sequence</title>
+  <style>
+    :root { --bg: #EEF0EC; --ink: #2b2f2e; --muted: #6b716f; --line: #d4d8d3; }
+    html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink);
+      font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; overflow: hidden; }
+    #stage { display: flex; align-items: center; justify-content: center; height: calc(100% - 56px); }
+    canvas#view { display: block; background: var(--bg); }
+    #ui { position: fixed; left: 0; right: 0; bottom: 0; height: 56px; display: flex; align-items: center;
+      gap: 12px; padding: 0 16px; border-top: 1px solid var(--line); background: #f7f8f6; box-sizing: border-box; }
+    #ui[hidden] { display: none; }
+    #ui button { font: inherit; padding: 6px 12px; border: 1px solid var(--line); background: #fff;
+      border-radius: 6px; cursor: pointer; min-width: 64px; }
+    #scrub { flex: 1; min-width: 120px; }
+    #readout { white-space: nowrap; color: var(--muted); }
+    /* Export mode: canvas only, exactly 1920x1080, no debug UI. */
+    body.export #stage { display: block; height: auto; }
+    body.export #ui { display: none !important; }
+  </style>
+
+  <!-- Determinism guard: any third-party code that calls Math.random (three's SimplexNoise in
+       GTAO, UUIDs) gets a seeded PRNG. Our own code never calls Math.random. -->
+  <script>
+    (function () {
+      var a = 20261002 >>> 0;
+      Math.random = function () {
+        a = (a + 0x6d2b79f5) | 0;
+        var t = Math.imul(a ^ (a >>> 15), 1 | a);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    })();
+  </script>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="stage"><canvas id="view"></canvas></div>
+  <div id="ui" hidden>
+    <button id="play" type="button">Pause</button>
+    <input id="scrub" type="range" min="0" max="15" step="0.0333" value="0" aria-label="Time" />
+    <span id="readout"></span>
+  </div>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
