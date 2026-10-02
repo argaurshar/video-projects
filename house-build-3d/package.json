@@ -1,0 +1,19 @@
+{
+  "name": "house-build-3d",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Deterministic 15 s Three.js build-sequence animation of a single-storey house (geometry + camera pass).",
+  "scripts": {
+    "preview": "node render.mjs --serve",
+    "render": "node render.mjs",
+    "still": "node render.mjs --still 14.97",
+    "timeline": "node render.mjs --timeline-only"
+  },
+  "dependencies": {
+    "three": "0.186.1"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^25.12.0"
+  }
+}
